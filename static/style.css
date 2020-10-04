@@ -1,0 +1,59 @@
+body {
+    margin-top: 5rem;
+    font-size: 10;
+}
+
+h2{
+    font-size: large;
+    padding-top: 40px;
+}
+
+div {
+    padding-left: 20px;
+    padding-top: 20px;
+}
+
+div.curs {
+    padding:20px;
+    display: inline-block;
+}
+
+.alert-warning {
+    background-color: orange;
+    color:black;
+}
+
+a {
+    display: block;
+    padding-left: 20px;
+    padding-top: 10px;
+    font-size: large;
+}
+
+
+@page { size: A4;}
+
+html #table {
+    text-align: center;
+    padding-right: 10cm;
+    padding-top: 3cm;
+}
+
+html h1 {
+    font-size: 40px;
+    font-weight: bold;
+    text-align: center;
+    padding-right: 10cm;
+}
+table {
+    border-collapse: collapse;
+}
+
+table, th, td {
+    border: 1px solid black;    
+}
+
+th, td {
+    padding: 10px;
+    text-align: left;
+  }

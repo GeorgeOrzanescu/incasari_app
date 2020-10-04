@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='style.css') }}">
+
+    <title>Incasari</title>
+  </head>
+
+  <body>
+    <h1>Incasari {{ date }}</h1>
+
+    <div class='curs' style='border: thick solid blue;'>
+      <h3> Curs ieri: {{ curs_ieri }}</h3>
+      <h3> Curs azi:  {{ curs_zi }}</h3>
+    </div>
+
+    <a href="{{ url_for('printeaza') }}">Print raport zi</a>
+    <a href="{{ url_for('incasari_detaliat') }}">Vezi incasari detaliate</a>
+    <a href="{{ url_for('raport_detaliat') }}">Print raport detaliat</a>
+
+    <div class="content-section">
+        <form method="POST" action="">
+            {{ form.hidden_tag() }}
+            {% with messages = get_flashed_messages(with_categories=true) %}
+              {% if messages %}
+                {% for category, message in messages %}
+                  <div class="alert col-sm-3 alert-{{ category }}">
+                    <span>{{ message }}</span>
+                  </div>
+                {% endfor %}
+              {% endif %}
+            {% endwith %}
+            <fieldset class="form-group" >
+                <div class="form-group">
+                  
+                  {{ form.tip.label }}
+                  {{ form.tip }}
+                                     
+                  {{ form.submit }}
+                  
+                </div>
+            </fieldset>
+          </form>
+          {% if raport%}
+            <p>Total Incasari : {{ total +raport.numerar + raport.card }}</p>
+          {% else %}
+            <p>Total Incasari : {{ total }}</p>
+          {% endif %}
+
+          {% if raport %}
+            <p>Total Card : {{ total_card + raport.card }}</p>
+          {% else %}
+            <p>Total Card : {{ total_card }}</p>
+          {% endif %}
+
+          <p>Total Op         : {{ total_op }}</p>
+
+          {% if raport%}
+            <p>Total Numerar : {{ total +raport.numerar }}</p>
+          {% else %}
+            <p>Total Numerar: {{ total_numerar }}</p>
+          {% endif %}
+
+          <p>Cheltuieli       : {{ cheltuieli}}</p>
+          <p>Total numerar ramas    : {{ total_numerar - cheltuieli }}</p>
+          
+    </div>
+    <div class ="content-section">
+      <form method="POST" action="">
+        {{ form.hidden_tag() }}
+        <fieldset class="form-group" >
+          <div class="form-group">
+            {{ form1.raportz_numerar.label }}
+            {{ form1.raportz_numerar(size=7) }}
+            <p style=color:red>Se completeaza la sfarsitul zilei!</p>
+            {% if form1.raportz_numerar.errors %}                                                      
+              <span style="color:red">{{ form1.raportz_numerar.errors[1] }}</span>
+            {% endif %}
+          </div>
+          <div class="form-group">
+            {{ form1.raportz_card.label }}
+            {{ form1.raportz_card(size=7) }}
+            <p style=color:red>Se completeaza la sfarsitul zilei!</p>
+            {% if form1.raportz_card.errors %}                                                      
+              <span style="color:red">{{ form1.raportz_card.errors[1] }}</span>
+            {% endif %}
+          </div>
+          <div class="form-group">
+            {{ form1.submit(id='button') }}
+          </div>
+        </fieldset> 
+      </form>
+    </div>
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+
+
+  </body>
+</html>
